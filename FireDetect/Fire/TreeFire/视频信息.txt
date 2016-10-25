@@ -1,0 +1,32 @@
+General
+Complete name                  : C:\Users\lenovo.Lenovo-PC\Desktop\毕业设计-2015-马淼\测试视频\TreeFire.mpg
+Format                         : MPEG Video
+Format version                 : Version 1
+File size                      : 4.48 MiB
+Duration                       : 1mn 2s
+Overall bit rate               : 599 Kbps
+
+Video
+Format                         : MPEG Video
+Format version                 : Version 1
+Format settings, BVOP          : Yes
+Format settings, Matrix        : Default
+Format settings, GOP           : M=3, N=15
+Duration                       : 1mn 2s
+Bit rate                       : 600 Kbps
+Width                          : 720 pixels
+Height                         : 480 pixels
+Display aspect ratio           : 4:3
+Frame rate                     : 29.970 (30000/1001) fps
+Standard                       : NTSC
+Color space                    : YUV
+Chroma subsampling             : 4:2:0
+Bit depth                      : 8 bits
+Scan type                      : Progressive
+Compression mode               : Lossy
+Bits/(Pixel*Frame)             : 0.058
+Time code of first frame       : 00:00:00:00
+GOP, Open/Closed               : Open
+GOP, Open/Closed of first fram : Closed
+Stream size                    : 4.48 MiB (100%)
+

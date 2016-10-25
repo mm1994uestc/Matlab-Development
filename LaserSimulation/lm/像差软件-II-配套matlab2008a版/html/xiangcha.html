@@ -1,0 +1,527 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN">
+<html xmlns:mwsh="http://www.mathworks.com/namespace/mcode/v1/syntaxhighlight.dtd">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   
+      <!--
+This HTML is auto-generated from an M-file.
+To make changes, update the M-file and republish this document.
+      -->
+      <title>xiangcha</title>
+      <meta name="generator" content="MATLAB 7.6">
+      <meta name="date" content="2015-03-18">
+      <meta name="m-file" content="xiangcha"><style>
+
+body {
+  background-color: white;
+  margin:10px;
+}
+
+h1 {
+  color: #990000; 
+  font-size: x-large;
+}
+
+h2 {
+  color: #990000;
+  font-size: medium;
+}
+
+/* Make the text shrink to fit narrow windows, but not stretch too far in 
+wide windows. */ 
+p,h1,h2,div.content div {
+  max-width: 600px;
+  /* Hack for IE6 */
+  width: auto !important; width: 600px;
+}
+
+pre.codeinput {
+  background: #EEEEEE;
+  padding: 10px;
+}
+@media print {
+  pre.codeinput {word-wrap:break-word; width:100%;}
+} 
+
+span.keyword {color: #0000FF}
+span.comment {color: #228B22}
+span.string {color: #A020F0}
+span.untermstring {color: #B20000}
+span.syscmd {color: #B28C00}
+
+pre.codeoutput {
+  color: #666666;
+  padding: 10px;
+}
+
+pre.error {
+  color: red;
+}
+
+p.footer {
+  text-align: right;
+  font-size: xx-small;
+  font-weight: lighter;
+  font-style: italic;
+  color: gray;
+}
+
+  </style></head>
+   <body>
+      <div class="content"><pre class="codeinput"><span class="comment">%&#21021;&#22987;&#21270;&#32534;&#36753;Matlab&#22270;&#24418;&#30028;&#38754;</span>
+figure;
+syms <span class="string">aa1</span> <span class="string">bb3</span>;
+a=0;<span class="comment">%&#30456;&#26426;&#26631;&#23450;&#22270;</span>
+I1=0;<span class="comment">%&#20108;&#20540;&#21270;&#22270;&#29255;</span>
+a1=0;<span class="comment">%&#27178;&#21521;&#21098;&#20999;&#22270;&#29255;</span>
+hang=0;<span class="comment">% &#27178;&#21521;&#21098;&#20999;&#22270;&#29255;&#30340;&#34892;&#25195;&#25551;&#22270;</span>
+sbr=<span class="string">'none'</span>;<span class="comment">%&#30456;&#26426;&#27604;&#20363;&#23383;&#31526;&#20018;</span>
+set(gcf,<span class="string">'unit'</span>,<span class="string">'centimeters'</span>,<span class="string">'position'</span>,[0.1,0.2,25,12]);<span class="comment">%&#35774;&#32622;&#22270;&#24418;&#21306;&#30340;&#23610;&#23544;</span>
+set(gcf,<span class="string">'defaultuicontrolunits'</span>,<span class="string">'normalized'</span>)<span class="comment">%&#35774;&#32622;&#29992;&#25143;&#40664;&#35748;&#31354;&#38388;&#21333;&#20301;&#23646;&#24615;&#20540;</span>
+h=subplot(2,2,1),imshow(a),title(<span class="string">'&#30456;&#26426;&#26631;&#23450;&#22270;'</span>);
+set(h,<span class="string">'position'</span>,[-0.1,0.52,0.4,0.4])
+h1=subplot(2,2,2),imshow(I1),title(<span class="string">'&#20108;&#20540;&#21270;&#22270;'</span>);
+set(h1,<span class="string">'position'</span>,[0.25,0.6,0.2,0.2])
+h2=subplot(2,2,3),imshow(a1),title(<span class="string">'&#27178;&#21521;&#21098;&#20999;&#22270;&#20687;'</span>);
+set(h2,<span class="string">'position'</span>,[-0.1,0.02,0.4,0.4]);
+h3=subplot(2,2,4),imshow(hang),title(<span class="string">'&#25195;&#25551;&#22270;'</span>);
+set(h3,<span class="string">'position'</span>,[0.15,0.02,0.4,0.4]);
+set(gcf,<span class="string">'defaultuicontrolhorizontal'</span>,<span class="string">'left'</span>);
+set(gcf,<span class="string">'defaultuicontrolfontsize'</span>,10);<span class="comment">%&#35774;&#32622;&#29992;&#25143;&#40664;&#35748;&#25511;&#20214;&#23383;&#20307;&#23646;&#24615;&#20540;</span>
+uicontrol(<span class="string">'style'</span>,<span class="string">'frame'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.47,0.0,0.6,1]);<span class="comment">%&#35774;&#32622;&#29992;&#25143;&#25511;&#20214;&#21306;</span>
+
+
+<span class="comment">%&#35835;&#26631;&#23450;&#22270;&#20687;</span>
+h_push1=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.5,0.85,0.1,0.12],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'&#35835;&#20837;&#26631;&#23450;&#22270;&#20687;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+   <span class="string">'[filename,pathname]=uigetfile('' *.bmp'');'</span><span class="keyword">...</span><span class="comment">%&#25171;&#24320;&#25991;&#20214;</span>
+   <span class="string">'B=strcat(pathname,filename);'</span><span class="keyword">...</span><span class="comment">%&#21512;&#24182;&#23383;&#31526;&#20018;</span>
+   <span class="string">'A=imread(B);'</span><span class="keyword">...</span><span class="comment">%&#35835;&#22270;&#29255;</span>
+   <span class="string">'a=A(:,:,1);'</span><span class="keyword">...</span><span class="comment">%&#23548;&#20986;&#22270;&#20687;&#28784;&#38454;&#20998;&#24067;&#30340;&#20108;&#32500;&#25968;&#32452;</span>
+   <span class="string">'I1=0;'</span><span class="keyword">...</span>
+   <span class="string">'h=subplot(2,2,1),imshow(a),title(''&#30456;&#26426;&#26631;&#23450;&#22270;'');'</span><span class="keyword">...</span>
+   <span class="string">'set(h,''position'',[-0.1,0.5,0.4,0.4]);'</span><span class="keyword">...</span>
+   <span class="string">'h1=subplot(2,2,2),imshow(I1),title(''&#20108;&#20540;&#21270;&#22270;'');'</span><span class="keyword">...</span>
+   <span class="string">'set(h1,''position'',[0.25,0.6,0.2,0.2]);'</span>
+   ]);
+
+<span class="comment">%&#35835;&#20837;&#21098;&#20999;&#22270;&#29255;</span>
+h_push2=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.7,0.85,0.15,0.12],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'&#35835;&#20837;&#27178;&#21521;&#21098;&#20999;&#22270;&#20687;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+   <span class="string">'[filename,pathname]=uigetfile('' *.bmp'');'</span><span class="keyword">...</span><span class="comment">%&#25171;&#24320;&#25991;&#20214;</span>
+   <span class="string">'B1=strcat(pathname,filename);'</span><span class="keyword">...</span><span class="comment">%&#21512;&#24182;&#23383;&#31526;&#20018;</span>
+   <span class="string">'A1=imread(B1);'</span><span class="keyword">...</span><span class="comment">%&#35835;&#22270;&#29255;</span>
+   <span class="string">'a1=A1(:,:,1);'</span><span class="keyword">...</span><span class="comment">%&#23548;&#20986;&#22270;&#20687;&#28784;&#38454;&#20998;&#24067;&#30340;&#20108;&#32500;&#25968;&#32452;</span>
+   <span class="string">'h2=subplot(2,2,3),imshow(a1),title(''&#27178;&#21521;&#21098;&#20999;&#22270;&#20687;'');'</span><span class="keyword">...</span>
+   <span class="string">'set(h2,''position'',[-0.1,0.02,0.4,0.4]);'</span><span class="keyword">...</span>
+   <span class="string">'S=size(a1);'</span><span class="keyword">...</span><span class="comment">%&#27979;&#37327;&#20301;&#22270;&#30340;&#23610;&#23544;</span>
+<span class="string">'s=S(1,1)/2;'</span><span class="keyword">...</span><span class="comment">%&#36873;&#25321;&#20013;&#38388;&#34892;</span>
+<span class="string">'hang=a1(s,:);'</span><span class="keyword">...</span>
+<span class="string">'h3=subplot(2,2,4),plot(hang),title(''&#25195;&#25551;&#22270;'');'</span><span class="keyword">...</span>
+   <span class="string">'set(h3,''position'',[0.25,0.05,0.3,0.3]);'</span><span class="keyword">...</span><span class="comment">;%&#30011;&#26354;&#32447;</span>
+   ]);
+
+
+<span class="comment">%&#27493;&#39588;&#20108;&#65306;&#26631;&#23450;</span>
+<span class="comment">%&#23545;&#26631;&#23450;&#22270;&#29255;&#20808;&#36827;&#34892;&#20108;&#20540;&#21270;&#22788;&#29702;&#65292;&#28982;&#21518;&#25214;&#21040;&#20004;&#20010;&#28857;&#30340;&#36136;&#24515;&#24182;&#31639;&#20986;&#20004;&#20010;&#36136;&#24515;&#30340;&#36317;&#31163;&#12290;</span>
+<span class="comment">%&#36890;&#36807;&#24050;&#30693;&#30340;&#36317;&#31163;&#25968;&#25454;&#26469;&#35745;&#31639;&#30456;&#26426;&#30340;&#27604;&#20363;&#22240;&#23376;</span>
+h_text=uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.5,0.7,0.1,0.12],<span class="string">'string'</span>,{<span class="string">'&#36755;&#20837;&#26631;&#23450;&#21442;&#25968; (x1,y1,x2,y2)'</span>});
+h_edit=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.5,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bx1=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;&#26631;&#23450;&#30340;&#31532;&#19968;&#20010;&#25968;&#20540;x1</span>
+ h_edit1=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.53,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'by1=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;&#26631;&#23450;&#30340;&#31532;&#19968;&#20010;&#25968;&#20540;y1</span>
+ h_edit2=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.56,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bx2=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;&#26631;&#23450;&#30340;&#31532;&#20108;&#20010;&#25968;&#20540;x2</span>
+ h_edit2=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.59,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'by2=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;&#26631;&#23450;&#30340;&#31532;&#20108;&#20010;&#25968;&#20540;y2</span>
+ h_text1=uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.5,0.45,0.15,0.12],<span class="keyword">...</span>
+      <span class="string">'string'</span>,{<span class="string">'&#30456;&#26426;&#26631;&#23450;&#27604;&#20363;'</span>,sbr});<span class="comment">%&#26174;&#31034;&#30456;&#26426;&#26631;&#23450;&#27604;&#20363;&#25968;&#20540;</span>
+ h_push3=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span><span class="comment">%&#35745;&#31639;&#30456;&#26426;&#27604;&#20363; &#36317;&#31163;&#25353;10mm&#35745;&#31639;</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.5,0.6,0.15,0.06],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'&#30456;&#26426;&#26631;&#23450;&#35745;&#31639;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+   <span class="string">'br=10/sqrt((bx1-bx2)^2+(by1-by2)^2);'</span><span class="keyword">...</span>
+   <span class="string">'sbr=num2str(br);'</span><span class="keyword">...</span>
+    <span class="string">'h_text1=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.5,0.45,0.15,0.12],''string'',{''&#30456;&#26426;&#26631;&#23450;&#27604;&#20363;'', sbr})'</span>
+   ]);
+
+<span class="comment">%&#22270;&#29255;&#20108;&#20540;&#21270;</span>
+I=a;<span class="comment">%</span>
+h_text2=uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.5,0.32,0.1,0.12],<span class="string">'string'</span>,{<span class="string">'&#36755;&#20837;&#20108;&#20540;&#21270;&#20540; 1-254'</span>});
+h_edit3=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span><span class="comment">%&#36755;&#20837;&#20108;&#20540;&#21270;&#20540;</span>
+    <span class="string">'position'</span>,[0.6,0.38,0.05,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'by3=str2num(get(gcbo,''string''));'</span><span class="keyword">...</span>
+        <span class="string">'I=a;'</span><span class="keyword">...</span>
+        <span class="string">'J=find(I&lt;by3);'</span><span class="keyword">...</span><span class="comment">%&#23567;&#20110;&#38408;&#20540;&#30340;&#20540;&#35774;&#32622;&#20026;0</span>
+        <span class="string">'I(J)=0;'</span><span class="keyword">...</span>
+        <span class="string">'J=find(I&gt;=by3);'</span><span class="keyword">...</span><span class="comment">%&#22823;&#20110;&#31561;&#20110;&#38408;&#20540;&#30340;&#20540;&#35774;&#32622;&#20026;255</span>
+        <span class="string">'I(J)=255;'</span>
+        ]);
+
+h_push4=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span><span class="comment">%&#20108;&#20540;&#21270;&#22270;&#29983;&#25104;</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.5,0.30,0.15,0.06],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'&#29983;&#25104;&#20108;&#20540;&#21270;&#22270;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+   <span class="string">'h=subplot(2,2,1),imshow(a),title(''&#30456;&#26426;&#26631;&#23450;&#22270;'');'</span><span class="keyword">...</span>
+   <span class="string">'set(h,''position'',[-0.1,0.5,0.4,0.4]);'</span><span class="keyword">...</span>
+   <span class="string">'[i,j]=find(I==255);'</span><span class="keyword">...</span><span class="comment">%&#25214;&#21040;&#20809;&#26001;&#30340;&#36793;&#32536;</span>
+<span class="string">'m1=min(i);'</span><span class="keyword">...</span><span class="comment">%&#25214;&#34892;&#30340;&#36793;&#30028;</span>
+<span class="string">'m2=max(i);'</span><span class="keyword">...</span>
+<span class="string">'n1=min(j);'</span><span class="keyword">...</span><span class="comment">%&#25214;&#21015;&#30340;&#36793;&#30028;</span>
+<span class="string">'n2=max(j);'</span><span class="keyword">...</span>
+<span class="string">'mmid=round((m1+m2)/2);'</span><span class="keyword">...</span><span class="comment">%&#23558;&#22270;&#24418;&#20998;&#21106;</span>
+<span class="string">'nmid=round((n1+n2)/2);'</span><span class="keyword">...</span>
+<span class="string">'I1=I(m1:m2,n1:n2);'</span><span class="keyword">...</span>
+<span class="string">'I2=im2double(I);'</span><span class="keyword">...</span><span class="comment">%&#25226;&#20301;&#22270;&#25968;&#23383;&#36716;&#21270;&#20026;&#21452;&#31934;&#24230;&#20540;</span>
+   <span class="string">'h1=subplot(2,2,2),imshow(I1),title(''&#20108;&#20540;&#21270;&#22270;'');'</span><span class="keyword">...</span>
+   <span class="string">'set(h1,''position'',[0.25,0.6,0.2,0.2]);'</span>
+]);
+
+<span class="comment">%&#27178;&#21521;&#21098;&#20999;&#37327;&#30340;&#35745;&#31639;</span>
+h_push5=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span><span class="comment">%&#35745;&#31639;&#27178;&#21521;&#21098;&#20999;&#37327;</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.5,0.22,0.15,0.06],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'&#35745;&#31639;&#27178;&#21521;&#21098;&#20999;&#37327;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+   <span class="string">'XY1=zhixin(m1,mmid,n1,nmid,I2);'</span><span class="keyword">...</span><span class="comment">%&#24038;&#20391;&#22270;&#24418;&#30340;&#36136;&#24515;x1,y1</span>
+<span class="string">'XY2=zhixin(mmid,m2,nmid,n2,I2);'</span><span class="keyword">...</span><span class="comment">%&#21491;&#20391;&#22270;&#24418;&#30340;&#36136;&#24515;x2,y2</span>
+<span class="string">'ss=br*sqrt((XY1(1,1)-XY2(1,1))^2+(XY1(1,2)-XY2(1,2))^2);'</span><span class="keyword">...</span><span class="comment">%&#27178;&#21521;&#21098;&#20999;&#37327;</span>
+<span class="string">'ss1=num2str(ss);'</span><span class="keyword">...</span>
+<span class="string">'h_text3=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.5,0.1,0.15,0.12],''string'',{''&#27178;&#21521;&#21098;&#20999;&#37327;'', ss1})'</span>
+  ]);
+
+<span class="comment">%a1&#21644;b3&#30340;&#35745;&#31639;</span>
+h_text4=uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.7,0.7,0.5,0.12],<span class="string">'string'</span>,{<span class="string">'&#36755;&#20837;&#27178;&#21521;&#21098;&#20999;&#22270;&#30340;&#26263;&#26465;&#32441;x&#22352;&#26631;, -3,-2,-1,1,2,3'</span>});
+h_edit4=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.7,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bt1=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;-3&#26465;&#32441;</span>
+ h_edit4=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.73,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bt2=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;-2&#26465;&#32441;</span>
+ h_edit6=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.76,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bt3=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;-1&#26465;&#32441;</span>
+ h_edit7=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.79,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bt4=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;1&#26465;&#32441;</span>
+h_edit8=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.82,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bt5=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;2&#26465;&#32441;</span>
+h_edit9=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.85,0.68,0.03,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'bt6=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#35835;&#20837;3&#26465;&#32441;</span>
+
+  h_push6=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span><span class="comment">%&#35745;&#31639;a1&#21644;b3&#21442;&#25968;</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.7,0.6,0.15,0.06],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'a1 &#21644;b3 &#21442;&#25968;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+  <span class="string">'lambda=0.0006328;'</span><span class="keyword">...</span>
+<span class="string">'t=(bt6-bt1)/2+bt1;'</span><span class="keyword">...</span>
+  <span class="string">'t1=(bt1-t)*br;'</span><span class="keyword">...</span>
+<span class="string">'t2=(bt2-t)*br;'</span><span class="keyword">...</span>
+<span class="string">'t3=(bt3-t)*br;'</span><span class="keyword">...</span>
+<span class="string">'t4=(bt4-t)*br;'</span><span class="keyword">...</span>
+<span class="string">'t5=(bt5-t)*br;'</span><span class="keyword">...</span>
+<span class="string">'t6=(bt6-t)*br;'</span><span class="keyword">...</span><span class="comment">%&#19981;&#21516;&#23380;&#24452;&#19979;&#30340;&#20540;</span>
+<span class="string">'eq1=2*t1*ss*aa1+4*ss*bb3*t1^3+bb3*t1*ss^3-0.5*(-3)*lambda;'</span><span class="keyword">...</span>
+<span class="string">'eq2=2*t3*ss*aa1+4*ss*bb3*t3^3+bb3*t3*ss^3-0.5*(-1)*lambda;'</span><span class="keyword">...</span>
+<span class="string">'[aa1,bb3]=solve(eq1,eq2);'</span><span class="keyword">...</span>
+<span class="string">'aa1=double(aa1);'</span><span class="keyword">...</span>
+<span class="string">'bb3=double(bb3);'</span><span class="keyword">...</span>
+<span class="string">'aaa1=num2str(aa1);'</span><span class="keyword">...</span>
+<span class="string">'bbb3=num2str(bb3);'</span><span class="keyword">...</span>
+<span class="string">'h_text5=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.85,0.45,0.10,0.2],''string'',{''a1='', aaa1,''b3='',bbb3})'</span>
+])
+h_text6=uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.7,0.3,0.5,0.12],<span class="string">'string'</span>,{<span class="string">'&#36755;&#20837;&#28966;&#36317;&#22352;&#26631;mm'</span>});
+h_edit10=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.7,0.3,0.06,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'ff=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#36755;&#20837;&#28966;&#36317;&#20540;</span>
+h_text7=uicontrol(<span class="string">'style'</span>,<span class="string">'text'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.85,0.3,0.5,0.12],<span class="string">'string'</span>,{<span class="string">'&#36755;&#20837;&#21322;&#24452;&#20540;mm'</span>});
+h_edit11=uicontrol(<span class="string">'style'</span>,<span class="string">'edit'</span>,<span class="string">'BackgroundColor'</span>,<span class="string">'white'</span>,<span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="keyword">...</span>
+    <span class="string">'position'</span>,[0.85,0.3,0.06,0.06],<span class="string">'horizontal'</span>,<span class="string">'left'</span>,<span class="keyword">...</span>
+    <span class="string">'callback'</span>,[<span class="keyword">...</span>
+        <span class="string">'RR=str2num(get(gcbo,''string''));'</span>]);<span class="comment">%&#36755;&#20837;&#21322;&#24452;&#20540;</span>
+    h_push7=uicontrol(<span class="string">'style'</span>,<span class="string">'push'</span>,<span class="keyword">...</span><span class="comment">%&#35745;&#31639;</span>
+   <span class="string">'unit'</span>,<span class="string">'normalized'</span>,<span class="string">'position'</span>,[0.7,0.2,0.25,0.06],<span class="keyword">...</span>
+   <span class="string">'string'</span>,<span class="string">'&#36724;&#21521;&#31163;&#28966;&#36317;&#31163;&#21644;&#21021;&#32423;&#29699;&#24046;'</span>,<span class="string">'callback'</span>,[<span class="keyword">...</span>
+   <span class="string">'deltaZ=aa1*2*ff^2;'</span><span class="keyword">...</span>
+   <span class="string">'deltaL=4*ff ^2*bb3*RR^2;'</span><span class="keyword">...</span>
+   <span class="string">'deltaZZ=num2str(deltaZ);'</span><span class="keyword">...</span>
+   <span class="string">'deltaLL=num2str(deltaL);'</span><span class="keyword">...</span>
+   <span class="string">'h_text8=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.7,0.05,0.5,0.15],''string'',{''deltaZ(&#36724;&#21521;&#31163;&#28966;&#36317;&#31163;&#65289;='', deltaZZ,''deltaL&#65288;&#21021;&#32423;&#29699;&#24046;&#65289;='',deltaLL})'</span>
+   ]);
+</pre><pre class="codeoutput">
+h =
+
+  342.0016
+
+
+h1 =
+
+  347.0015
+
+
+h2 =
+
+  352.0015
+
+
+h3 =
+
+  357.0015
+
+
+h_push6 =
+
+  365.0015
+
+</pre><img vspace="5" hspace="5" src="xiangcha_01.png"> <p class="footer"><br>
+            Published with MATLAB&reg; 7.6<br></p>
+      </div>
+      <!--
+##### SOURCE BEGIN #####
+
+%初始化编辑Matlab图形界面
+figure;
+syms aa1 bb3;
+a=0;%相机标定图
+I1=0;%二值化图片
+a1=0;%横向剪切图片
+hang=0;% 横向剪切图片的行扫描图
+sbr='none';%相机比例字符串
+set(gcf,'unit','centimeters','position',[0.1,0.2,25,12]);%设置图形区的尺寸
+set(gcf,'defaultuicontrolunits','normalized')%设置用户默认空间单位属性值
+h=subplot(2,2,1),imshow(a),title('相机标定图');
+set(h,'position',[-0.1,0.52,0.4,0.4])
+h1=subplot(2,2,2),imshow(I1),title('二值化图');
+set(h1,'position',[0.25,0.6,0.2,0.2])
+h2=subplot(2,2,3),imshow(a1),title('横向剪切图像');
+set(h2,'position',[-0.1,0.02,0.4,0.4]);
+h3=subplot(2,2,4),imshow(hang),title('扫描图');
+set(h3,'position',[0.15,0.02,0.4,0.4]);
+set(gcf,'defaultuicontrolhorizontal','left');
+set(gcf,'defaultuicontrolfontsize',10);%设置用户默认控件字体属性值
+uicontrol('style','frame',...
+    'position',[0.47,0.0,0.6,1]);%设置用户控件区
+
+
+%读标定图像
+h_push1=uicontrol('style','push',...
+   'unit','normalized','position',[0.5,0.85,0.1,0.12],...
+   'string','读入标定图像','callback',[...
+   '[filename,pathname]=uigetfile('' *.bmp'');'...%打开文件
+   'B=strcat(pathname,filename);'...%合并字符串
+   'A=imread(B);'...%读图片
+   'a=A(:,:,1);'...%导出图像灰阶分布的二维数组
+   'I1=0;'...
+   'h=subplot(2,2,1),imshow(a),title(''相机标定图'');'...
+   'set(h,''position'',[-0.1,0.5,0.4,0.4]);'...
+   'h1=subplot(2,2,2),imshow(I1),title(''二值化图'');'...
+   'set(h1,''position'',[0.25,0.6,0.2,0.2]);'
+   ]);
+
+%读入剪切图片
+h_push2=uicontrol('style','push',...
+   'unit','normalized','position',[0.7,0.85,0.15,0.12],...
+   'string','读入横向剪切图像','callback',[...
+   '[filename,pathname]=uigetfile('' *.bmp'');'...%打开文件
+   'B1=strcat(pathname,filename);'...%合并字符串
+   'A1=imread(B1);'...%读图片
+   'a1=A1(:,:,1);'...%导出图像灰阶分布的二维数组
+   'h2=subplot(2,2,3),imshow(a1),title(''横向剪切图像'');'...
+   'set(h2,''position'',[-0.1,0.02,0.4,0.4]);'...
+   'S=size(a1);'...%测量位图的尺寸
+'s=S(1,1)/2;'...%选择中间行
+'hang=a1(s,:);'...
+'h3=subplot(2,2,4),plot(hang),title(''扫描图'');'...
+   'set(h3,''position'',[0.25,0.05,0.3,0.3]);'...;%画曲线
+   ]);
+
+
+%步骤二：标定
+%对标定图片先进行二值化处理，然后找到两个点的质心并算出两个质心的距离。
+%通过已知的距离数据来计算相机的比例因子
+h_text=uicontrol('style','text','unit','normalized',...
+    'position',[0.5,0.7,0.1,0.12],'string',{'输入标定参数 (x1,y1,x2,y2)'});
+h_edit=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.5,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bx1=str2num(get(gcbo,''string''));']);%读入标定的第一个数值x1
+ h_edit1=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.53,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'by1=str2num(get(gcbo,''string''));']);%读入标定的第一个数值y1   
+ h_edit2=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.56,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bx2=str2num(get(gcbo,''string''));']);%读入标定的第二个数值x2
+ h_edit2=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.59,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'by2=str2num(get(gcbo,''string''));']);%读入标定的第二个数值y2 
+ h_text1=uicontrol('style','text','unit','normalized','position',[0.5,0.45,0.15,0.12],...
+      'string',{'相机标定比例',sbr});%显示相机标定比例数值 
+ h_push3=uicontrol('style','push',...%计算相机比例 距离按10mm计算
+   'unit','normalized','position',[0.5,0.6,0.15,0.06],...
+   'string','相机标定计算','callback',[...
+   'br=10/sqrt((bx1-bx2)^2+(by1-by2)^2);'...
+   'sbr=num2str(br);'...
+    'h_text1=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.5,0.45,0.15,0.12],''string'',{''相机标定比例'', sbr})'
+   ]);
+      
+%图片二值化
+I=a;%
+h_text2=uicontrol('style','text','unit','normalized',...
+    'position',[0.5,0.32,0.1,0.12],'string',{'输入二值化值 1-254'});
+h_edit3=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...%输入二值化值
+    'position',[0.6,0.38,0.05,0.06],'horizontal','left',...
+    'callback',[...
+        'by3=str2num(get(gcbo,''string''));'...
+        'I=a;'...
+        'J=find(I<by3);'...%小于阈值的值设置为0
+        'I(J)=0;'...
+        'J=find(I>=by3);'...%大于等于阈值的值设置为255
+        'I(J)=255;'
+        ]);
+   
+h_push4=uicontrol('style','push',...%二值化图生成 
+   'unit','normalized','position',[0.5,0.30,0.15,0.06],...
+   'string','生成二值化图','callback',[...
+   'h=subplot(2,2,1),imshow(a),title(''相机标定图'');'...
+   'set(h,''position'',[-0.1,0.5,0.4,0.4]);'...
+   '[i,j]=find(I==255);'...%找到光斑的边缘
+'m1=min(i);'...%找行的边界
+'m2=max(i);'...
+'n1=min(j);'...%找列的边界
+'n2=max(j);'...
+'mmid=round((m1+m2)/2);'...%将图形分割
+'nmid=round((n1+n2)/2);'...
+'I1=I(m1:m2,n1:n2);'...
+'I2=im2double(I);'...%把位图数字转化为双精度值
+   'h1=subplot(2,2,2),imshow(I1),title(''二值化图'');'...
+   'set(h1,''position'',[0.25,0.6,0.2,0.2]);'  
+]);
+
+%横向剪切量的计算
+h_push5=uicontrol('style','push',...%计算横向剪切量 
+   'unit','normalized','position',[0.5,0.22,0.15,0.06],...
+   'string','计算横向剪切量','callback',[...
+   'XY1=zhixin(m1,mmid,n1,nmid,I2);'...%左侧图形的质心x1,y1
+'XY2=zhixin(mmid,m2,nmid,n2,I2);'...%右侧图形的质心x2,y2
+'ss=br*sqrt((XY1(1,1)-XY2(1,1))^2+(XY1(1,2)-XY2(1,2))^2);'...%横向剪切量
+'ss1=num2str(ss);'...
+'h_text3=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.5,0.1,0.15,0.12],''string'',{''横向剪切量'', ss1})'
+  ]); 
+
+%a1和b3的计算
+h_text4=uicontrol('style','text','unit','normalized',...
+    'position',[0.7,0.7,0.5,0.12],'string',{'输入横向剪切图的暗条纹x坐标, -3,-2,-1,1,2,3'});
+h_edit4=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.7,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bt1=str2num(get(gcbo,''string''));']);%读入-3条纹
+ h_edit4=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.73,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bt2=str2num(get(gcbo,''string''));']);%读入-2条纹  
+ h_edit6=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.76,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bt3=str2num(get(gcbo,''string''));']);%读入-1条纹
+ h_edit7=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.79,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bt4=str2num(get(gcbo,''string''));']);%读入1条纹 
+h_edit8=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.82,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bt5=str2num(get(gcbo,''string''));']);%读入2条纹 
+h_edit9=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.85,0.68,0.03,0.06],'horizontal','left',...
+    'callback',[...
+        'bt6=str2num(get(gcbo,''string''));']);%读入3条纹 
+ 
+  h_push6=uicontrol('style','push',...%计算a1和b3参数
+   'unit','normalized','position',[0.7,0.6,0.15,0.06],...
+   'string','a1 和b3 参数','callback',[... 
+  'lambda=0.0006328;'...
+'t=(bt6-bt1)/2+bt1;'...
+  't1=(bt1-t)*br;'...
+'t2=(bt2-t)*br;'...
+'t3=(bt3-t)*br;'...
+'t4=(bt4-t)*br;'...
+'t5=(bt5-t)*br;'...
+'t6=(bt6-t)*br;'...%不同孔径下的值 
+'eq1=2*t1*ss*aa1+4*ss*bb3*t1^3+bb3*t1*ss^3-0.5*(-3)*lambda;'...
+'eq2=2*t3*ss*aa1+4*ss*bb3*t3^3+bb3*t3*ss^3-0.5*(-1)*lambda;'...
+'[aa1,bb3]=solve(eq1,eq2);'...
+'aa1=double(aa1);'...
+'bb3=double(bb3);'...
+'aaa1=num2str(aa1);'...
+'bbb3=num2str(bb3);'...
+'h_text5=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.85,0.45,0.10,0.2],''string'',{''a1='', aaa1,''b3='',bbb3})'
+])
+h_text6=uicontrol('style','text','unit','normalized',...
+    'position',[0.7,0.3,0.5,0.12],'string',{'输入焦距坐标mm'});
+h_edit10=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.7,0.3,0.06,0.06],'horizontal','left',...
+    'callback',[...
+        'ff=str2num(get(gcbo,''string''));']);%输入焦距值 
+h_text7=uicontrol('style','text','unit','normalized',...
+    'position',[0.85,0.3,0.5,0.12],'string',{'输入半径值mm'});
+h_edit11=uicontrol('style','edit','BackgroundColor','white','unit','normalized',...
+    'position',[0.85,0.3,0.06,0.06],'horizontal','left',...
+    'callback',[...
+        'RR=str2num(get(gcbo,''string''));']);%输入半径值
+    h_push7=uicontrol('style','push',...%计算
+   'unit','normalized','position',[0.7,0.2,0.25,0.06],...
+   'string','轴向离焦距离和初级球差','callback',[... 
+   'deltaZ=aa1*2*ff^2;'...
+   'deltaL=4*ff ^2*bb3*RR^2;'...
+   'deltaZZ=num2str(deltaZ);'...
+   'deltaLL=num2str(deltaL);'...
+   'h_text8=uicontrol(''style'',''text'',''unit'',''normalized'',''position'',[0.7,0.05,0.5,0.15],''string'',{''deltaZ(轴向离焦距离）='', deltaZZ,''deltaL（初级球差）='',deltaLL})'
+   ]);
+
+
+
+  
+
+   
+   
+
+
+
+
+
+       
+
+
+
+
+
+##### SOURCE END #####
+-->
+   </body>
+</html>

@@ -1,0 +1,14 @@
+%滤波器频率响应计算和显示%
+figure
+h=fspecial('gaussian');
+freqz2(h)
+figure
+H=fspecial('average',5);%创建一个滤波矩阵
+freqz2(H)
+PIC=imread('G:\Math Modeling\Matlab Development\Filter Design\Image.bmp');
+PIC_Deal=imfilter(PIC,H);
+subplot(1,2,1)
+imshow(PIC)
+subplot(1,2,2)
+imshow()
+%S3=imfilter(S2,H);%对图像进行一次3X3的均值滤波

@@ -1,0 +1,2 @@
+在使用MATLAB的GUI组件过程中，当需要在两个不同的坐标轴下绘制坐标图时，我们可以采用指令
+axes（handles.axes1）来激活坐标轴axes1，同样我们可以激活坐标轴2利用axes（handles.axes2）指令。

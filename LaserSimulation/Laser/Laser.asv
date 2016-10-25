@@ -1,0 +1,62 @@
+%任务1的程序%
+R1=500;R2=600;L=700;
+S=[5;0];%初始的状态
+A=1-2*L/R2;
+B=2*L*(1-L/R2);
+C=-2/R1-2/R2+4*L/R1*R2;
+D=-2*L/R1+(1-2*L/R1)*(1-2*L/R2);
+T=[A,B;C,D];
+n=10;
+X=linspace(0,L);
+for Count=1:n
+    S1=[1,0;-2/R2,1]*[1,L;0,1]*S;
+    Y=tan(S(2))*X+S(1);
+    hold on,plot(X,Y,'g')
+    Y=tan(S1(2))*X+S1(1);
+    hold on,plot(L-X,Y,'r')
+    S=[1,0;-2/R1,1]*[1,L;0,1]*[1,0;-2/R2,1]*[1,L;0,1]*S;
+end
+%任务2的程序%
+clear 
+syms LL; 
+R=1000;
+F=50;L=800; 
+TL=[1 L;0 1]; 
+TM=[1 0;-1/F 1]; 
+TR2=[1 0;0 1]; 
+TR1=[1 0;-2/R 1]; 
+TL1=[1 LL;0 1]; 
+TRR=TR1*TL*TM*TL1*TR2*TL1*TM*TL; 
+G=(TRR(1)+TRR(4))/2; 
+X1=solve(G-1); 
+X2=solve(G+1); 
+disp(['距离L1在  ',char(X2),'<L1<',char(X1),'  内腔是稳定的'])
+
+S=[5;0];
+L=800;
+L1=50;
+R=1000;
+F=50;
+TL=[1 L;0 1]; 
+TM=[1 0;-1/F 1]; 
+TR2=[1 0;0 1]; 
+TR1=[1 0;-2/R 1]; 
+TL1=[1 L1;0 1];%qustion
+X=linspace(0,800);
+X1=linspace(800,850);
+figure('name','任务2');
+n=100;
+for Count=1:n
+    S1=TM*TL*S;
+    Y=tan(S(2))*X+S(1);
+    hold on,plot(X,Y,'b')
+    Y=tan(S1(2))*(X1-800)+S1(1);
+    hold on,plot(X1,Y,'b')
+    S2=TR2*TL1*S1;
+    Y=tan(S2(2))*(X1-800)+S2(1);
+    hold on,plot(1650-X1,Y,'r')
+    S3=TM*TL1*S2;
+    Y=tan(S3(2))*X+S3(1);
+    hold on,plot(800-X,Y,'r')
+    S=TR1*TL*TM*TL1*TR2*TL1*TM*TL*S;
+end
